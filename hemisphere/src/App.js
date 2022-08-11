@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import HemisphereDisplay from "./components/HemisphereDisplay";
 
 export default class App extends Component {
   constructor(props) {
@@ -7,6 +8,9 @@ export default class App extends Component {
       latitude: null,
       errorMessage: "",
     };
+  }
+
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({ latitude: position.coords.latitude });
@@ -28,9 +32,7 @@ export default class App extends Component {
     } else if (!this.state.errorMessage && this.state.latitude) {
       return (
         <>
-          <div>
-            <h1>{this.state.latitude}</h1>
-          </div>
+          <HemisphereDisplay latitude={this.state.latitude} />
         </>
       );
     } else {
